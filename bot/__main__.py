@@ -45,8 +45,8 @@ def stats(update, context):
 
 def start(update, context):
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Repo", "https://github.com/SlamDevs/slam-mirrorbot")
-    buttons.buildbutton("Channel", "https://t.me/SlamMirrorUpdates")
+    buttons.buildbutton("Facebook", "https://www.facebook.com/samadrita.mukhopadhyay.7")
+    buttons.buildbutton("Instagram", "https://www.instagram.com/samadrita_mukhopadhyay")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     LOGGER.info('UID: {} - UN: {} - MSG: {}'.format(update.message.chat.id, update.message.chat.username, update.message.text))
     uptime = get_readable_time((time.time() - botStartTime))
