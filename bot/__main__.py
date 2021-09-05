@@ -48,19 +48,16 @@ def start(update, context):
     buttons.buildbutton("Repo", "https://github.com/SlamDevs/slam-mirrorbot")
     buttons.buildbutton("Channel", "https://t.me/SlamMirrorUpdates")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
+    LOGGER.info('UID: {} - UN: {} - MSG: {}'.format(update.message.chat.id, update.message.chat.username, update.message.text))
+    uptime = get_readable_time((time.time() - botStartTime))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
-        start_string = f'''
-This bot can mirror all your links to Google Drive!
-Type /{BotCommands.HelpCommand} to get a list of available commands
-'''
-        sendMarkup(start_string, context.bot, update, reply_markup)
-    else:
-        sendMarkup(
-            'Oops! not a Authorized user.\nPlease deploy your own <b>slam-mirrorbot</b>.',
-            context.bot,
-            update,
-            reply_markup,
-        )
+        if update.message.from_user.username:
+            uname = f'@{update.message.from_user.username}'
+        else:
+            uname = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a>'
+        sendMessage(f"Hey {uname}, I'm always active to mirror your files. 🙂 ", context.bot, update)
+    else :
+        sendMessage(f"Oops! You're not yet authorized to use me, contact @samadrita2003 for authorization.", context.bot, update)
 
 
 def restart(update, context):
